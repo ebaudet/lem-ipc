@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/29 19:54:49 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/05/29 21:49:09 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ void	loop(char *shared_msg, int id)
 	char	*line;
 	while (get_next_line(0, &line) > 0)
 	{
-		if (!ft_strncmp(line, "print", 5))
+		if (!ft_strcmp(line, "p"))
 			ft_putendl(shared_msg);
-		else if (!ft_strncmp(line, "exit", 4))
+		else if (!ft_strcmp(line, "exit"))
 			return ;
-		else if (!ft_strncmp(line, "clear", 5))
+		else if (!ft_strcmp(line, "clear"))
 		{
 			if (shmctl(id, IPC_RMID, NULL) == -1)
 			{
 				ft_error("shmctl(remove)");
 				return ;
-			};
+			}
 		}
 		else
 		{
