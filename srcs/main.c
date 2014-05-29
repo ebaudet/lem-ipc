@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/29 21:49:09 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/05/29 21:50:21 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ int		main(int ac, char **av)
 	{
 		ft_putendl("shared_msg already exist");
 		id = shmget(key, sizeof(shared_msg), 0);
+	}
+	else
+	{
+		ft_putendl("création du tableau");
 	}
 	shared_msg = (char *)shmat(id, NULL, SHM_R | SHM_W);
 	loop(shared_msg, id);
