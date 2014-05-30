@@ -6,12 +6,12 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/05/27 14:12:54 by ebaudet           #+#    #+#              #
-#    Updated: 2014/05/29 16:33:24 by ebaudet          ###   ########.fr        #
+#    Updated: 2014/05/30 03:13:01 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= lemipc
-FILES	= main.c
+FILES	= main.c ft_error.c init_data.c
 SRCS	= $(addprefix srcs/, $(FILES))
 OBJS	= $(SRCS:srcs/%.c=.obj/%.o)
 INC		= -I includes -I libft/includes

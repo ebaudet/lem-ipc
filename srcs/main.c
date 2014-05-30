@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/29 21:50:21 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/05/30 03:14:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@
 #include "libft.h"
 #include "lemipc.h"
 
-int		ft_error(char *msg)
-{
-	ft_putendl(msg);
-	return (EXIT_FAILURE);
-}
 
 void	loop(char *shared_msg, int id)
 {
 	char	*line;
+
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!ft_strcmp(line, "p"))
@@ -62,9 +58,7 @@ int		main(int ac, char **av)
 		id = shmget(key, sizeof(shared_msg), 0);
 	}
 	else
-	{
-		ft_putendl("création du tableau");
-	}
+		init_data();
 	shared_msg = (char *)shmat(id, NULL, SHM_R | SHM_W);
 	loop(shared_msg, id);
 	return (EXIT_SUCCESS);

@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lemipc.h                                           :+:      :+:    :+:   */
+/*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/29 16:34:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/30 03:12:40 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/05/30 03:09:36 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/05/30 03:13:52 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEMIPC_H
-# define LEMIPC_H
+#include "libft.h"
+#include "lemipc.h"
 
-/*
-** ft_error.c
-*/
-int		ft_error(char *msg);
-
-/*
-** init_data.c
-*/
-void	init_data();
-
-#endif
+void	init_data()
+{
+	ft_putendl("création du tableau");
+}
