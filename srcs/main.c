@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/30 22:26:11 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/05/31 07:36:05 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "lemipc.h"
+
+int		usage(int ac, char **av)
+{
+	if (ac != 2)
+	{
+		ft_putstr("usage : ");
+		ft_putstr(av[0]);
+		ft_putendl(" <team>");
+		return (0);
+	}
+	return (1);
+}
 
 void	loop(t_data *data, int id)
 {
@@ -47,8 +59,8 @@ int		main(int ac, char **av)
 	int			id;
 	t_data		*data;
 
-	(void)ac;
-	(void)av;
+	if (!usage(ac, av))
+		return (EXIT_FAILURE);
 	if ((key = ftok(".",'A')) == -1)
 		return (ft_error("ftok"));
 	if ((id = shmget(key, sizeof(t_data), IPC_CREAT | IPC_EXCL | 0666)) == -1)
@@ -62,6 +74,7 @@ int		main(int ac, char **av)
 		data = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
 		init_data(data);
 	}
+	print_tab(data);
 	loop(data, id);
 	return (EXIT_SUCCESS);
 }

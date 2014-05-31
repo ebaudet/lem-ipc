@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:34:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/30 21:39:41 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/05/31 07:35:31 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,21 @@ int		ft_error(char *msg);
 ** init_data.c
 */
 void	init_data();
+
+/*
+** rand_val.c
+*/
+int		rand_val();
+
+/*
+** put_player.c
+*/
+void	put_player(t_data *data, int player);
+
+/*
+** print_tab.c
+*/
+void	print_tab(t_data *data);
+
 
 #endif

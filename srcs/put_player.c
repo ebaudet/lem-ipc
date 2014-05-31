@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   put_player.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/30 03:09:36 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/31 07:37:20 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/05/31 07:29:44 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/05/31 07:30:16 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "lemipc.h"
-#include <stdio.h>
 
-void	init_data(t_data *data)
+void		put_player(t_data *data, int player)
 {
-	ft_putendl("création du tableau");
-
 	int		x;
 	int		y;
 
-	x = -1;
-	while (++x < HEIGHT)
+	while (42)
 	{
-		y = -1;
-		while (++y < WIDTH)
-			data->tab[x][y] = 0;
-	}
-
-	int		i;
-	i = -1;
-	while (++i < 10)
-	{
-		put_player(data, i);
+		x = rand_val() % HEIGHT;
+		y = rand_val() % WIDTH;
+		if (data->tab[x][y] == 0)
+		{
+			data->tab[x][y] = player;
+			break ;
+		}
 	}
 }

@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   print_tab.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/30 03:09:36 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/31 07:37:20 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/05/31 07:33:57 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/05/31 07:42:45 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lemipc.h"
-#include <stdio.h>
 
-void	init_data(t_data *data)
+void	print_tab(t_data *data)
 {
-	ft_putendl("création du tableau");
-
 	int		x;
 	int		y;
 
@@ -26,13 +23,13 @@ void	init_data(t_data *data)
 	{
 		y = -1;
 		while (++y < WIDTH)
-			data->tab[x][y] = 0;
-	}
-
-	int		i;
-	i = -1;
-	while (++i < 10)
-	{
-		put_player(data, i);
+		{
+			if (data->tab[x][y] != 0)
+				ft_putnbr(data->tab[x][y]);
+			else
+				ft_putchar('_');
+			ft_putchar(' ');
+		}
+		ft_putchar('\n');
 	}
 }
