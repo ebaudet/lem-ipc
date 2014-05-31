@@ -6,13 +6,13 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/05/27 14:12:54 by ebaudet           #+#    #+#              #
-#    Updated: 2014/05/31 15:54:17 by ebaudet          ###   ########.fr        #
+#    Updated: 2014/05/31 18:11:43 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= lemipc
 FILES	= main.c ft_error.c init_data.c rand_val.c put_player.c print_tab.c \
-		usage.c
+		usage.c find_enemy.c is_alive.c is_enemy.c
 SRCS	= $(addprefix srcs/, $(FILES))
 OBJS	= $(SRCS:srcs/%.c=.obj/%.o)
 INC		= -I includes -I libft/includes
