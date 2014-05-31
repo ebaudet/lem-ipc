@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   usage.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/30 03:09:36 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/31 15:58:57 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/05/31 15:52:41 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/05/31 15:55:36 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "lemipc.h"
-#include <stdio.h>
 
-void	init_data(t_data *data)
+int		usage(int ac, char **av)
 {
-	ft_putendl("création du tableau");
-
-	int		x;
-	int		y;
-
-	x = -1;
-	while (++x < HEIGHT)
+	if (ac != 2)
 	{
-		y = -1;
-		while (++y < WIDTH)
-			data->tab[x][y] = 0;
+		ft_putstr("usage : ");
+		ft_putstr(av[0]);
+		ft_putendl(" <team>");
+		return (0);
 	}
-	data->nb_player = 0;
+	if (ft_strlen(av[1]) != 1)
+	{
+		ft_putstr("usage : ");
+		ft_putstr(av[0]);
+		ft_putendl(" <team>\n<team> has to be a char");
+		return (0);
+	}
+	return (1);
 }
