@@ -6,40 +6,39 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 22:18:49 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:06:55 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
 #include <stdlib.h>
 #include "libft.h"
 #include "lemipc.h"
 
-void	loop(t_data *data, t_player *player, int id, int id_sem)
+void	loop(t_data *data, t_player *player, int id, int sem_id)
 {
 	char	*line;
+	t_pos	enemy;
 
-	(void) player;
-	(void) id_sem;
-	while (get_next_line(0, &line) > 0)
+	while (42)
 	{
-		if (!ft_strcmp(line, "p"))
-			ft_putendl(data->msg);
-		else if (!ft_strcmp(line, "exit"))
+		print_tab(data);
+		if (!is_alive(data, player->team, player->pos))
+		{
+			data->nb_player--;
+			data->tab[player->pos.x][player->pos.y] = 0;
 			return ;
-		else if (!ft_strcmp(line, "clear"))
-		{
-			if (shmctl(id, IPC_RMID, NULL) == -1)
-			{
-				ft_error("shmctl(remove)");
-				return ;
-			}
 		}
-		else
+		semaphore(sem_id, -1);
+		enemy = find_enemy(data, player->team, player->pos);
+		if (enemy.x != -1)
 		{
-			ft_strcpy(data->msg, line);
+			move_to(enemy, player, data);
 		}
+		sleep(1);
+		semaphore(sem_id, 1);
 	}
 }
 
@@ -63,5 +62,6 @@ int		main(int ac, char **av)
 	player_init(data, *av[1], &player);
 	print_tab(data);
 	loop(data, &player, id, id_sem);
+	shm_clear(id, id_sem, data);
 	return (EXIT_SUCCESS);
 }
