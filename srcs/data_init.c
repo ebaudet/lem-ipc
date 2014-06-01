@@ -6,16 +6,18 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/30 03:09:36 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 18:00:24 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:12:48 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "lemipc.h"
+// #include <sys/types.h>
 #include <stdio.h>
 
-void	data_init(t_data *data, t_key key)
+void	data_init(t_data *data, key_t key)
 {
+	(void) key;
 	ft_putendl("création du tableau");
 
 	int		x;

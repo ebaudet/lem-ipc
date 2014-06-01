@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:34:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 17:59:43 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:13:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct	s_pos
 
 int				usage(int ac, char **av);
 int				ft_error(char *msg);
-void			data_init(key_t key);
+void			data_init(t_data *data, key_t key);
 int				rand_val();
 void			put_player(t_data *data, char team);
 void			print_tab(t_data *data);
