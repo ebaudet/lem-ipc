@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:34:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 23:18:30 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:55:57 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct	s_data
 {
-	int 		nb_player;
+	int			nb_player;
 	char		msg[BUF];
 	char		tab[HEIGHT][WIDTH];
 }				t_data;
@@ -54,7 +54,10 @@ void			semaphore(int semid, int sem_op);
 void			shm_clear(int id, int semid, t_data *data);
 void			move_to(t_pos enemy, t_player *player, t_data *data);
 t_player		*get_player(void);
-
+void			move_height(t_pos enemy, t_player *player, t_data *data
+	, int t);
+void			move_width(t_pos enemy, t_player *player, t_data *data
+	, int t);
 void			get_sig(void);
 void			eb_sig_action(int s);
 

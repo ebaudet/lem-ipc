@@ -6,14 +6,14 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 07:26:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/31 07:26:36 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:57:04 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <time.h>
 
-int		rand_val()
+int		rand_val(void)
 {
 	static int		i = 0;
 

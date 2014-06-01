@@ -6,10 +6,9 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 17:16:25 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 17:22:43 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:57:45 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <sys/types.h>
 #include <sys/sem.h>

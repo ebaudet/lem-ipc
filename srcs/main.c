@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 23:19:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:52:39 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		main(int ac, char **av)
 	get_sig();
 	if (!usage(ac, av))
 		return (EXIT_FAILURE);
-	if ((key = ftok(".",'A')) == -1)
+	if ((key = ftok(".", 'A')) == -1)
 		return (ft_error("ftok"));
 	if ((id = ipc_init(key, &data)) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

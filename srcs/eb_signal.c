@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 23:09:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 23:29:13 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:52:08 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	eb_sig_action(int s)
 	int			id;
 	int			sem_id;
 
-	(void) s;
+	(void)s;
 	player = get_player();
-	key = ftok(".",'A');
+	key = ftok(".", 'A');
 	id = ipc_init(key, &data);
 	sem_id = semaphore_init(key);
 	data->tab[player->pos.x][player->pos.y] = 0;

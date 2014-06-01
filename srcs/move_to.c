@@ -6,16 +6,14 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 22:32:10 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 22:51:32 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:56:20 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "lemipc.h"
 
-static void		move_width(t_pos enemy, t_player *player, t_data *data, int t);
-
-static void		move_height(t_pos enemy, t_player *player, t_data *data, int t)
+void		move_height(t_pos enemy, t_player *player, t_data *data, int t)
 {
 	int		move;
 
@@ -33,7 +31,7 @@ static void		move_height(t_pos enemy, t_player *player, t_data *data, int t)
 	}
 }
 
-static void		move_width(t_pos enemy, t_player *player, t_data *data, int t)
+void		move_width(t_pos enemy, t_player *player, t_data *data, int t)
 {
 	int		move;
 
@@ -47,12 +45,11 @@ static void		move_width(t_pos enemy, t_player *player, t_data *data, int t)
 	else
 	{
 		if (t != 1 && enemy.y != player->pos.y)
-			move_width(enemy, player, data, 1);
+			move_height(enemy, player, data, 1);
 	}
 }
 
-
-void			move_to(t_pos enemy, t_player *player, t_data *data)
+void		move_to(t_pos enemy, t_player *player, t_data *data)
 {
 	int		height;
 	int		width;

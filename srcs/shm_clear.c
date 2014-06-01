@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 22:17:05 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 22:25:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:57:59 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	shm_clear(int id, int semid, t_data *data)
 {
 	if (data->nb_player < 1)
 	{
-		shmctl(id, IPC_RMID, NULL);	
+		shmctl(id, IPC_RMID, NULL);
 		semctl(semid, 0, IPC_RMID, 0);
 	}
 }
