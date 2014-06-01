@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_init.c                                        :+:      :+:    :+:   */
+/*   ipc_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/30 03:09:36 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:19:31 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/06/01 19:17:14 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/06/01 19:24:04 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include "lemipc.h"
-#include <stdio.h>
+#include "libft.h"
 
-void	data_init(t_data *data)
+int		ipc_init(key_t key, t_data **data)
 {
-	int		x;
-	int		y;
+	int		id;
 
-	x = -1;
-	while (++x < HEIGHT)
+	if ((id = shmget(key, sizeof(t_data), IPC_CREAT | IPC_EXCL | 0666)) == -1)
 	{
-		y = -1;
-		while (++y < WIDTH)
-			data->tab[x][y] = 0;
+		ft_putendl("shared_msg already exist");
+		id = shmget(key, sizeof(t_data), 0);
+		*data = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
 	}
-	data->nb_player = 0;
+	else
+	{
+		*data = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
+		data_init(*data);
+	}
+	return (id);
 }
