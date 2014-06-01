@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:37:40 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:41:57 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		main(int ac, char **av)
 	int			id;
 	t_data		*data;
 	int			id_sem;
+	t_pos		pos;
 
 	if (!usage(ac, av))
 		return (EXIT_FAILURE);
@@ -57,7 +58,7 @@ int		main(int ac, char **av)
 	if ((id_sem = semaphore_init(key)) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	data->nb_player += 1;
-	put_player(data, *av[1]);
+	pos = put_player(data, *av[1]);
 	print_tab(data);
 	loop(data, id);
 	return (EXIT_SUCCESS);
