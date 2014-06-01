@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_player.c                                       :+:      :+:    :+:   */
+/*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 07:29:44 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:42:04 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:49:56 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemipc.h"
 
-t_pos		put_player(t_data *data, char team)
+void		player_init(t_data *data, char team, t_player *player)
 {
 	t_pos	pos;
 
@@ -26,5 +26,7 @@ t_pos		put_player(t_data *data, char team)
 			break ;
 		}
 	}
-	return (pos);
+	player->pos = pos;
+	player->team = team;
+	player->is_master = 0;
 }
