@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 23:09:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 23:52:08 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/02 00:02:27 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void	eb_sig_action(int s)
 void	get_sig(void)
 {
 	signal(SIGINT, &eb_sig_action);
+	signal(SIGQUIT, &eb_sig_action);
 }
