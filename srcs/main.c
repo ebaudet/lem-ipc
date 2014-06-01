@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:48:58 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:53:10 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 #include "lemipc.h"
 
-void	loop(t_data *data, int id)
+void	loop(t_data *data, t_player player, int id, int id_sem)
 {
 	char	*line;
 
@@ -60,38 +60,6 @@ int		main(int ac, char **av)
 	data->nb_player += 1;
 	player_init(data, *av[1], &player);
 	print_tab(data);
-	loop(data, id);
+	loop(data, &player, id, id_sem);
 	return (EXIT_SUCCESS);
 }
-
-
-/*#include <sys/types.h>
-#include <sys/ipc.h>
-#include <sys/sem.h>*/
-
-/*
-int main(int argc, char **argv)
-{
-	key_t clef;
-	int semid;
-	sembuf op;
-
-	clef = ftok(argv[0], ID_PROJET); //Obtention d'un clé
-	semid = semget(clef, 1, IPC_CREAT | IPC_EXCL | 0666);
-	//Obtention d'un identifiant de sémaphore
-	semctl(semid, 0, SET_VAL, 1); //Initialisation du sémapore à 1
-	 
-	op.sem_num = O; //Numéro de notre sémaphore: le premier et le seul
-	op.sem_op = -1; //Pour un P() on décrémente
-	op.sem_flg = 0; //On ne s'en occupe pas
-
-	semop(semid, &op, 1); //Entrée dans la section critique (P() ou down())
-	//Section critique
-	op.sem_op = 1; //Pour un V() on incrémente
-	semop(semid, &op, 1); //Sortie de la section critique (V() ou up())
-
-	semctl(semid, 0, IPC_RMID, 0); //Destruction du sémaphore
-
-	return 0;
-}
-*/
