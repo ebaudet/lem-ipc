@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:31:45 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:37:40 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ int		main(int ac, char **av)
 	key_t		key;
 	int			id;
 	t_data		*data;
+	int			id_sem;
 
 	if (!usage(ac, av))
 		return (EXIT_FAILURE);
 	if ((key = ftok(".",'A')) == -1)
 		return (ft_error("ftok"));
 	if ((id = ipc_init(key, &data)) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if ((id_sem = semaphore_init(key)) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	data->nb_player += 1;
 	put_player(data, *av[1]);

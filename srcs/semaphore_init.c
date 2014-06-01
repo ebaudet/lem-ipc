@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 17:16:03 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 17:31:38 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:37:54 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 #include "libft.h"
+#include "lemipc.h"
 
 int		semaphore_init(key_t key)
 {
@@ -22,7 +23,10 @@ int		semaphore_init(key_t key)
 	if ((semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0666)) == -1)
 	{
 		ft_putendl("semaphore already exist");
-		return (-1);
+		if ((semid = semget(key, 1, 0)) == -1)
+		{
+			return (ft_error("cannot get semaphore"));
+		}
 	}
 	semctl(semid, 0, SETVAL, 1);
 	return (semid);
