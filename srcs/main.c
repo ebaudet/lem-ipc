@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/02 01:10:05 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/02 01:14:21 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	loop(t_data *data, t_player *player, int sem_id)
 	while (42)
 	{
 		print_tab(data);
+		semaphore(sem_id, -1);
 		if (!is_alive(data, player->team, player->pos))
 		{
 			data->nb_player--;
 			data->tab[player->pos.x][player->pos.y] = 0;
+			semaphore(sem_id, 1);
 			return ;
 		}
-		semaphore(sem_id, -1);
 		enemy = find_enemy(data, player->team, player->pos);
 		if (enemy.x != -1)
 		{
