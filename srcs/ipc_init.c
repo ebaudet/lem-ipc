@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 19:17:14 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:24:04 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:30:55 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int		ipc_init(key_t key, t_data **data)
 	if ((id = shmget(key, sizeof(t_data), IPC_CREAT | IPC_EXCL | 0666)) == -1)
 	{
 		ft_putendl("shared_msg already exist");
-		id = shmget(key, sizeof(t_data), 0);
+		if ((id = shmget(key, sizeof(t_data), 0)) == -1)
+			return (ft_error("Error shmget"));
 		*data = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
 	}
 	else

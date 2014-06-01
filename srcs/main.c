@@ -6,12 +6,11 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:22:36 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:30:44 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/ipc.h>
-#include <sys/shm.h>
+
 #include <stdlib.h>
 #include "libft.h"
 #include "lemipc.h"
@@ -51,7 +50,8 @@ int		main(int ac, char **av)
 		return (EXIT_FAILURE);
 	if ((key = ftok(".",'A')) == -1)
 		return (ft_error("ftok"));
-	id = ipc_init(key, &data);
+	if ((id = ipc_init(key, &data)) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	data->nb_player += 1;
 	put_player(data, *av[1]);
 	print_tab(data);
