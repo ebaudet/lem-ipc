@@ -6,11 +6,12 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:30:44 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 19:31:45 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <stdlib.h>
 #include "libft.h"
 #include "lemipc.h"
