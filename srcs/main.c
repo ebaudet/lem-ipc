@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:53:10 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 22:18:49 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 #include "libft.h"
 #include "lemipc.h"
 
-void	loop(t_data *data, t_player player, int id, int id_sem)
+void	loop(t_data *data, t_player *player, int id, int id_sem)
 {
 	char	*line;
 
+	(void) player;
+	(void) id_sem;
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!ft_strcmp(line, "p"))

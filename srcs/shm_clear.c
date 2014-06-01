@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   semaphore_init.c                                   :+:      :+:    :+:   */
+/*   shm_clear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/06/01 17:16:03 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 22:15:11 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/06/01 22:17:05 by ebaudet           #+#    #+#             */
+/*   Updated: 2014/06/01 22:19:47 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/ipc.h>
+#include <sys/shm.h>
 #include <sys/sem.h>
-#include "libft.h"
-#include "lemipc.h"
+#include <stdlib.h>
 
-int		semaphore_init(key_t key)
+void	shm_clear(int id, int semid)
 {
-	int		semid;
-
-	if ((semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0666)) == -1)
-	{
-		ft_putendl("semaphore already exist");
-		if ((semid = semget(key, 1, 0)) == -1)
-		{
-			return (ft_error("cannot get semaphore"));
-		}
-	}
-	semctl(semid, 0, SETVAL, 1);
-	return (semid);
+	shmctl(id, IPC_RMID, NULL);	
+	semctl(semid, 0, IPC_RMID, 0);
 }
