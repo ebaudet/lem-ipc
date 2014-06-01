@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 23:06:55 by ebaudet          ###   ########.fr       */
+/*   Updated: 2014/06/01 23:19:10 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 #include "libft.h"
 #include "lemipc.h"
 
-void	loop(t_data *data, t_player *player, int id, int sem_id)
+void	loop(t_data *data, t_player *player, int sem_id)
 {
-	char	*line;
 	t_pos	enemy;
 
 	while (42)
@@ -48,8 +47,9 @@ int		main(int ac, char **av)
 	int			id;
 	t_data		*data;
 	int			id_sem;
-	t_player	player;
+	t_player	*player;
 
+	get_sig();
 	if (!usage(ac, av))
 		return (EXIT_FAILURE);
 	if ((key = ftok(".",'A')) == -1)
@@ -59,9 +59,10 @@ int		main(int ac, char **av)
 	if ((id_sem = semaphore_init(key)) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	data->nb_player += 1;
-	player_init(data, *av[1], &player);
+	player = get_player();
+	player_init(data, *av[1], player);
 	print_tab(data);
-	loop(data, &player, id, id_sem);
+	loop(data, player, id_sem);
 	shm_clear(id, id_sem, data);
 	return (EXIT_SUCCESS);
 }
