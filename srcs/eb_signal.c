@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 23:09:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/02 00:02:27 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/10/24 18:19:47 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	get_sig(void)
 {
 	signal(SIGINT, &eb_sig_action);
 	signal(SIGQUIT, &eb_sig_action);
+	signal(SIGTERM, &eb_sig_action);
+	signal(SIGCHLD, &eb_sig_action);
 }

@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/30 03:11:30 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/30 03:13:34 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/10/25 17:45:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int		ft_error(char *msg)
 {
-	ft_putendl(msg);
+	ft_putstrc(msg, C_RED);
+	ft_putchar('\n');
 	return (EXIT_FAILURE);
 }

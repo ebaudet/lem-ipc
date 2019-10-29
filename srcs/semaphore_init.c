@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 17:16:03 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 22:15:11 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/10/25 17:45:50 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		semaphore_init(key_t key)
 
 	if ((semid = semget(key, 1, IPC_CREAT | IPC_EXCL | 0666)) == -1)
 	{
-		ft_putendl("semaphore already exist");
+		ft_putstrc("semaphore already exist\n", C_YELLOW);
 		if ((semid = semget(key, 1, 0)) == -1)
 		{
 			return (ft_error("cannot get semaphore"));

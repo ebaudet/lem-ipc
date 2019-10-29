@@ -6,13 +6,13 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 07:29:44 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 19:49:56 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/10/22 20:30:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemipc.h"
 
-void		player_init(t_data *data, char team, t_player *player)
+void		player_init(t_data *sh_data, char team, t_player *player)
 {
 	t_pos	pos;
 
@@ -20,9 +20,9 @@ void		player_init(t_data *data, char team, t_player *player)
 	{
 		pos.x = rand_val() % HEIGHT;
 		pos.y = rand_val() % WIDTH;
-		if (data->tab[pos.x][pos.y] == 0)
+		if (sh_data->tab[pos.x][pos.y] == 0)
 		{
-			data->tab[pos.x][pos.y] = team;
+			sh_data->tab[pos.x][pos.y] = team;
 			break ;
 		}
 	}

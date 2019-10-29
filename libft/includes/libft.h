@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/21 11:44:10 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/05/14 12:25:46 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/10/25 17:47:09 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,24 @@
 
 # include <string.h>
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE	32
+
+# define C_BLACK	30
+# define C_RED		31
+# define C_GREEN	32
+# define C_YELLOW	33
+# define C_BLUE		34
+# define C_MAGENTA	35
+# define C_CYAN		36
+# define C_LGRAY	37
+# define C_DGRAY	90
+# define C_LRED		91
+# define C_LGREEN	92
+# define C_LYELLOW	93
+# define C_LBLUE	94
+# define C_LMAGENTA	95
+# define C_LCYAN	96
+# define C_WHITE	97
 
 /*
 ** functions part 1
@@ -81,5 +98,6 @@ void	ft_putnbr_fd(int n, int fd);
 ** function bonus
 */
 int		get_next_line(int const fd, char **line);
+void	ft_putstrc(char const *s, int color);
 
 #endif

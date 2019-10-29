@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   usage.c                                            :+:      :+:    :+:   */
+/*   ft_putstrc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/31 15:52:41 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/10/25 17:19:19 by ebaudet          ###   ########.fr       */
+/*   Created: 2019/10/25 17:33:20 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/10/25 17:35:49 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		usage(int ac, char **av)
+void	ft_putstrc(char const *s, int color)
 {
-	if (ac != 2)
-	{
-		ft_putstr("usage : ");
-		ft_putstr(av[0]);
-		ft_putendl(" <team>");
-		ft_putendl("if <team> is definded as %, it's allow to clean the game.");
-		return (0);
-	}
-	if (ft_strlen(av[1]) != 1)
-	{
-		ft_putstr("usage : ");
-		ft_putstr(av[0]);
-		ft_putendl(" <team>\n<team> has to be a char");
-		return (0);
-	}
-	return (1);
+	ft_putstr("\033[0;");
+	ft_putnbr(color);
+	ft_putstr("m");
+	ft_putstr(s);
+	ft_putstr("\033[0m");
 }

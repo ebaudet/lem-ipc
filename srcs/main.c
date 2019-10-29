@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/10/17 17:13:00 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/10/29 18:49:28 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,26 @@
 #include "libft.h"
 #include "lemipc.h"
 
-void	loop(t_data *data, t_player *player, int sem_id)
+void	loop(t_data *sh_data, t_player *player, int sem_id)
 {
 	t_pos	enemy;
 
-	while (42)
+	while (sh_data->nb_player > 0)
 	{
-		print_tab(data);
+		print_tab(sh_data, player);
 		semaphore(sem_id, -1);
-		if (!is_alive(data, player->team, player->pos))
+		if (!is_alive(sh_data, player->team, player->pos))
 		{
-			data->nb_player--;
-			data->tab[player->pos.x][player->pos.y] = 0;
+			sh_data->nb_player--;
+			sh_data->tab[player->pos.x][player->pos.y] = 0;
 			semaphore(sem_id, 1);
 			return ;
 		}
-		enemy = find_enemy(data, player->team, player->pos);
+		// enemy = find_enemy(sh_data, player->team, player->pos);
+		enemy = find_closest(sh_data, player->team, player->pos);
 		if (enemy.x != -1)
 		{
-			move_to(enemy, player, data);
+			move_to(enemy, player, sh_data);
 		}
 		semaphore(sem_id, 1);
 		sleep(1);
@@ -46,7 +47,7 @@ int		main(int ac, char **av)
 {
 	key_t		key;
 	int			id;
-	t_data		*data;
+	t_data		*sh_data;
 	int			id_sem;
 	t_player	*player;
 
@@ -55,15 +56,17 @@ int		main(int ac, char **av)
 		return (EXIT_SUCCESS);
 	if ((key = ftok(".", 'A')) == -1)
 		return (ft_error("ftok"));
-	if ((id = ipc_init(key, &data)) == EXIT_FAILURE)
+	if ((id = ipc_init(key, &sh_data)) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if ((id_sem = semaphore_init(key)) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	data->nb_player += 1;
+	if (clear_all(*av[1], sh_data, id, id_sem))
+		return (EXIT_SUCCESS);
+	sh_data->nb_player += 1;
 	player = get_player();
-	player_init(data, *av[1], player);
-	print_tab(data);
-	loop(data, player, id_sem);
-	shm_clear(id, id_sem, data);
+	player_init(sh_data, *av[1], player);
+	print_tab(sh_data, player);
+	loop(sh_data, player, id_sem);
+	shm_clear(id, id_sem, sh_data);
 	return (EXIT_SUCCESS);
 }

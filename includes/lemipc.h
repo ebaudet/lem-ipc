@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:34:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 23:55:57 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/10/29 18:53:28 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ int				semaphore_init(key_t key);
 void			data_init(t_data *data);
 int				rand_val();
 void			player_init(t_data *data, char team, t_player *player);
-void			print_tab(t_data *data);
+void			print_tab(t_data *data, t_player *pl);
 t_pos			find_enemy(t_data *data, char team, t_pos pos);
+t_pos			find_closest(t_data *shd, char team, t_pos p);
 int				is_enemy(t_data *data, char team, int x, int y);
 int				is_alive(t_data *data, char team, t_pos pos);
 void			semaphore(int semid, int sem_op);
@@ -60,5 +61,6 @@ void			move_width(t_pos enemy, t_player *player, t_data *data
 	, int t);
 void			get_sig(void);
 void			eb_sig_action(int s);
+int				clear_all(char team, t_data *sh_data, int id, int id_sem);
 
 #endif
