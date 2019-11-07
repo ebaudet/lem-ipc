@@ -6,7 +6,7 @@
 #    By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/05/27 14:12:54 by ebaudet           #+#    #+#              #
-#    Updated: 2019/11/07 14:28:48 by ebaudet          ###   ########.fr        #
+#    Updated: 2019/11/07 15:08:18 by ebaudet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,25 +24,33 @@ CC		= gcc
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	make -C libft
+$(NAME): make_libft $(OBJS)
+	@echo ""
 	$(CC) $(FLAGS) $(SRCS) -o $(NAME) $(INC) $(INC) $(LIB)
+	@echo "> Compilation \033[35m$(NAME)\033[m [\033[32mDONE\033[m]\n"
 
 .obj/%.o: srcs/%.c
-	mkdir -p .obj
-	$(CC) -c $< -o $@ $(FLAGS) $(INC)
+	@mkdir -p .obj
+	@$(CC) -c $< -o $@ $(FLAGS) $(INC)
+	@echo -n .
 
-gdb:
-	make -C libft
+gdb: make_libft
 	cc -g $(FLAGS) $(SRCS) -o $(NAME) $(INC) $(INC) $(LIB)
 	gdb $(NAME)
 
 clean:
 	rm -rf .obj
+	make -C libft clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -C libft fclean
 
 re: fclean all
 
-.PHONY: all gdb clean fclean re
+make_libft:
+	@echo "Compilation de la \033[35mlibft\033[m :"
+	@make -C libft
+	@echo ""
+
+.PHONY: all gdb clean fclean re make_libft
