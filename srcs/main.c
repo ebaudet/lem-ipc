@@ -6,37 +6,54 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 12:50:01 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 13:27:54 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <sys/types.h>
+#include <sys/msg.h>
 #include <stdlib.h>
 #include "libft.h"
 #include "lemipc.h"
 
-void		loop(t_data *shared, t_player *player, int sem_id)
+void		loop(t_data *shared, t_player *p, int sem_id)
 {
 	t_pos	enemy;
+	t_msg	msg;
 
 	while (shared->nb_player > 0)
 	{
-		print_tab(shared, player);
 		sem_lock(sem_id);
-		if (!is_alive(shared, player->team, player->pos))
+		print_tab(shared, p);
+		if (!is_alive(shared, p->team, p->pos))
 		{
 			shared->nb_player--;
-			shared->tab[player->pos.x][player->pos.y] = 0;
+			shared->tab[p->pos.x][p->pos.y] = 0;
 			sem_unlock(sem_id);
 			return ;
 		}
-		// enemy = find_enemy(shared, player->team, player->pos);
-		enemy = find_closest(shared, player->team, player->pos);
+		if (msgrcv(p->id_msg, &msg, sizeof(msg.pos), p->team, IPC_NOWAIT) == -1) {
+			ft_putstrc("No message for team\n", C_CYAN);
+			enemy = find_closest(shared, p->team, p->pos);
+		} else {
+			ft_putstrc("Message for team. Enemy on [", C_CYAN);
+			ft_putnbr(msg.pos.x);
+			ft_putstrc(";", C_CYAN);
+			ft_putnbr(msg.pos.y);
+			ft_putstrc("]\n", C_CYAN);
+			enemy = find_closest(shared, p->team, msg.pos);
+		}
+		// enemy = find_enemy(shared, p->team, p->pos);
+
 		if (enemy.x != -1)
 		{
-			move_to(enemy, player, shared);
+			move_to(enemy, p, shared);
+			msg.pos = set_pos(enemy.x, enemy.y);
+			msg.msg_type = p->team;
+			msgsnd(p->id_msg, &msg, sizeof(msg.pos), 0);
 		}
 		sem_unlock(sem_id);
 		sleep(1);

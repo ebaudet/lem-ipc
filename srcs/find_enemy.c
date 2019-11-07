@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 17:47:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/04 13:21:26 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 13:31:04 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ t_pos	find_closest(t_data *shd, char team, t_pos p)
 	int		dist;
 	t_pos	find;
 
+	if (test_pos(shd, p, team))
+		return (p);
 	dist = 0;
 	dist_max = get_max_dist(p);
 	while (++dist <= dist_max)

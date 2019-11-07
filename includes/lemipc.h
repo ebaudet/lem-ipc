@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:34:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 12:47:21 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 13:22:50 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ typedef struct	s_player
 
 typedef struct s_msg
 {
-
+	long		msg_type;
+	t_pos		pos;
 }				t_msg;
 
 int				usage(int ac, char **av);

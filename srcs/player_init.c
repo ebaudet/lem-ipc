@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 07:29:44 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 09:32:26 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 13:39:43 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ static t_pos	get_initial_pos(t_data *shared, int i)
 {
 	t_pos	pos;
 
-	// pos.x = rand_val() % HEIGHT;
-	// pos.y = rand_val() % WIDTH;
-	pos.x = 9;
-	pos.y = shared->nb_player + i;
+	(void)i;
+	(void)shared;
+	pos.x = rand_val() % HEIGHT;
+	pos.y = rand_val() % WIDTH;
+	// pos.y = shared->nb_player % 2 ? 1 : WIDTH - 1;
+	// pos.x = shared->nb_player + i;
 	return (pos);
 }
 
