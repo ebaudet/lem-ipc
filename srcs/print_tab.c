@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 07:33:57 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/10/29 20:00:43 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/04 12:48:52 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,9 @@ void	print_tab(t_data *sh_data, t_player *pl)
 	}
 	ft_putstr("il y a ");
 	ft_putnbr(sh_data->nb_player);
-	ft_putendl(" en jeu.");
+	ft_putstr(" en jeu. [");
+	ft_putnbr(pl->pos.x);
+	ft_putstr(";");
+	ft_putnbr(pl->pos.y);
+	ft_putstr("]\n");
 }

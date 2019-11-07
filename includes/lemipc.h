@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:34:23 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/10/29 18:53:28 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/04 13:21:37 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ t_pos			find_enemy(t_data *data, char team, t_pos pos);
 t_pos			find_closest(t_data *shd, char team, t_pos p);
 int				is_enemy(t_data *data, char team, int x, int y);
 int				is_alive(t_data *data, char team, t_pos pos);
-void			semaphore(int semid, int sem_op);
+int				sem_lock(int semid);
+int				sem_unlock(int semid);
 void			shm_clear(int id, int semid, t_data *data);
 void			move_to(t_pos enemy, t_player *player, t_data *data);
 t_player		*get_player(void);
@@ -62,5 +63,6 @@ void			move_width(t_pos enemy, t_player *player, t_data *data
 void			get_sig(void);
 void			eb_sig_action(int s);
 int				clear_all(char team, t_data *sh_data, int id, int id_sem);
+t_pos			set_pos(int x, int y);
 
 #endif

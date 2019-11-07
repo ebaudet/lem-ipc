@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 17:47:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/10/29 19:39:43 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/04 13:21:26 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,6 @@ t_pos		find_enemy(t_data *shdata, char team, t_pos pos)
 		}
 	}
 	return (find);
-}
-
-static t_pos	set_pos(int x, int y)
-{
-	t_pos	pos;
-
-	pos.x = x;
-	pos.y = y;
-	return (pos);
 }
 
 static int		test_pos(t_data *shd, t_pos pos, char team)
