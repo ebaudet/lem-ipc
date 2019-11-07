@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/30 03:09:36 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/10/22 20:20:40 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:48:44 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "lemipc.h"
 #include <stdio.h>
 
-void	data_init(t_data *sh_data)
+void	data_init(t_data *shared)
 {
 	int		x;
 	int		y;
@@ -24,7 +24,7 @@ void	data_init(t_data *sh_data)
 	{
 		y = -1;
 		while (++y < WIDTH)
-			sh_data->tab[x][y] = 0;
+			shared->tab[x][y] = 0;
 	}
-	sh_data->nb_player = 0;
+	shared->nb_player = 0;
 }

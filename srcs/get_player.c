@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 23:16:27 by ebaudet           #+#    #+#             */
-/*   Updated: 2014/06/01 23:52:25 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:53:40 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 t_player	*get_player(void)
 {
-	static t_player		*player = NULL;
+	static t_player		*p = NULL;
 
-	if (!player)
-		player = (t_player *)malloc(sizeof(player));
-	return (player);
+	if (!p)
+		p = (t_player *)malloc(sizeof(p));
+	return (p);
 }

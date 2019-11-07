@@ -6,14 +6,14 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 17:47:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 14:38:40 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:51:19 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "lemipc.h"
 
-t_pos			find_enemy(t_data *shdata, char team, t_pos pos)
+t_pos			find_enemy(t_data *shared, char team, t_pos pos)
 {
 	t_pos	tmp;
 	t_pos	find;
@@ -26,7 +26,7 @@ t_pos			find_enemy(t_data *shdata, char team, t_pos pos)
 		tmp.y = -1;
 		while (++tmp.y < WIDTH)
 		{
-			if (shdata->tab[tmp.y][tmp.x] && shdata->tab[tmp.y][tmp.x] != team)
+			if (shared->tab[tmp.y][tmp.x] && shared->tab[tmp.y][tmp.x] != team)
 			{
 				if (find.x == -1 || ((abs(pos.x - find.x)
 					+ abs(pos.y - find.y)) > (abs(pos.x - tmp.x)
@@ -42,20 +42,20 @@ t_pos			find_enemy(t_data *shdata, char team, t_pos pos)
 	return (find);
 }
 
-static int		test_pos(t_data *shd, t_pos pos, char team)
+static int		test_pos(t_data *shared, char team, t_pos pos)
 {
 	if (pos.x < 0 || pos.x >= HEIGHT)
 		return (0);
 	else if (pos.y < 0 || pos.y >= WIDTH)
 		return (0);
-	else if (!shd->tab[pos.x][pos.y])
+	else if (!shared->tab[pos.x][pos.y])
 		return (0);
-	else if (shd->tab[pos.x][pos.y] == team)
+	else if (shared->tab[pos.x][pos.y] == team)
 		return (0);
 	return (1);
 }
 
-static t_pos	find_dist(t_data *shd, t_pos p, int dist, char team)
+static t_pos	find_dist(t_data *shared, char team, t_pos p, int dist)
 {
 	int		n;
 	t_pos	find;
@@ -64,16 +64,16 @@ static t_pos	find_dist(t_data *shd, t_pos p, int dist, char team)
 	while (++n < dist)
 	{
 		find = set_pos(p.x - (dist - n), p.y - n);
-		if (test_pos(shd, find, team))
+		if (test_pos(shared, team, find))
 			return (find);
 		find = set_pos(p.x + n, p.y - (dist - n));
-		if (test_pos(shd, find, team))
+		if (test_pos(shared, team, find))
 			return (find);
 		find = set_pos(p.x + (dist - n), p.y + n);
-		if (test_pos(shd, find, team))
+		if (test_pos(shared, team, find))
 			return (find);
 		find = set_pos(p.x - n, p.y + (dist - n));
-		if (test_pos(shd, find, team))
+		if (test_pos(shared, team, find))
 			return (find);
 	}
 	find = set_pos(-1, -1);
@@ -95,19 +95,19 @@ static int		get_max_dist(t_pos pos)
 	return (max);
 }
 
-t_pos			find_closest(t_data *shd, char team, t_pos p)
+t_pos			find_closest(t_data *shared, char team, t_pos p)
 {
 	int		dist_max;
 	int		dist;
 	t_pos	find;
 
-	if (test_pos(shd, p, team))
+	if (test_pos(shared, team, p))
 		return (p);
 	dist = 0;
 	dist_max = get_max_dist(p);
 	while (++dist <= dist_max)
 	{
-		find = find_dist(shd, p, dist, team);
+		find = find_dist(shared, team, p, dist);
 		if (find.x != -1 && find.y != -1)
 			return (find);
 	}

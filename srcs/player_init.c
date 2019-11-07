@@ -6,13 +6,13 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 07:29:44 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 14:39:52 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:53:12 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemipc.h"
 
-void		player_init(t_data *shared, char team, t_player *player)
+void		player_init(t_data *shared, char team, t_player *p)
 {
 	t_pos	pos;
 	int		i;
@@ -29,7 +29,7 @@ void		player_init(t_data *shared, char team, t_player *player)
 		}
 		i++;
 	}
-	player->pos = pos;
-	player->team = team;
-	player->is_master = 0;
+	p->pos = pos;
+	p->team = team;
+	p->is_master = 0;
 }
