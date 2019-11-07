@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 17:16:25 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/04 12:37:56 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:44:21 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static int		semaphore(int semid, int sem_op)
 	return (0);
 }
 
-int		sem_lock(int semid)
+int				sem_lock(int semid)
 {
 	return (semaphore(semid, -1));
 }
 
-int		sem_unlock(int semid)
+int				sem_unlock(int semid)
 {
 	return (semaphore(semid, 1));
 }

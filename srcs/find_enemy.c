@@ -6,14 +6,14 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 17:47:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 13:31:04 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:38:40 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "lemipc.h"
 
-t_pos		find_enemy(t_data *shdata, char team, t_pos pos)
+t_pos			find_enemy(t_data *shdata, char team, t_pos pos)
 {
 	t_pos	tmp;
 	t_pos	find;
@@ -59,6 +59,7 @@ static t_pos	find_dist(t_data *shd, t_pos p, int dist, char team)
 {
 	int		n;
 	t_pos	find;
+
 	n = -1;
 	while (++n < dist)
 	{
@@ -81,7 +82,7 @@ static t_pos	find_dist(t_data *shd, t_pos p, int dist, char team)
 
 static int		get_max_dist(t_pos pos)
 {
-	int 	max;
+	int		max;
 	int		tmp;
 
 	max = abs(0 - pos.x) + abs(0 - pos.y);
@@ -94,7 +95,7 @@ static int		get_max_dist(t_pos pos)
 	return (max);
 }
 
-t_pos	find_closest(t_data *shd, char team, t_pos p)
+t_pos			find_closest(t_data *shd, char team, t_pos p)
 {
 	int		dist_max;
 	int		dist;
@@ -114,31 +115,29 @@ t_pos	find_closest(t_data *shd, char team, t_pos p)
 	return (find);
 }
 
-
 /*
-	[p.x - dist][p.y]
-		[p.x - (dist - n)][p.y - n]
-		[p.x - (dist - 0)][p.y - 0]
-		[p.x - (dist - 1)][p.y - 1]
-		[p.x - (dist - 2)][p.y - 2]
-		[p.x - (dist - 3)][p.y - 3]
-	[p.x][p.y - dist]
-		[p.x + n][p.y - (dist - n)]
-		[p.x + 0][p.y - (dist - 0)]
-		[p.x + 1][p.y - (dist - 1)]
-		[p.x + 2][p.y - (dist - 2)]
-		[p.x + 3][p.y - (dist - 3)]
-	[p.x + dist][p.y]
-		[p.x + (dist - n)][p.y + n]
-		[p.x + (dist - 0)][p.y + 0]
-		[p.x + (dist - 1)][p.y + 1]
-		[p.x + (dist - 2)][p.y + 2]
-		[p.x + (dist - 3)][p.y + 3]
-	[p.x][p.y + dist]
-		[p.x - n][p.y + (dist - n)]
-		[p.x - 0][p.y + (dist - 0)]
-		[p.x - 1][p.y + (dist - 1)]
-		[p.x - 2][p.y + (dist - 2)]
-		[p.x - 3][p.y + (dist - 3)]
+**	[p.x - dist][p.y]
+**		[p.x - (dist - n)][p.y - n]
+**		[p.x - (dist - 0)][p.y - 0]
+**		[p.x - (dist - 1)][p.y - 1]
+**		[p.x - (dist - 2)][p.y - 2]
+**		[p.x - (dist - 3)][p.y - 3]
+**	[p.x][p.y - dist]
+**		[p.x + n][p.y - (dist - n)]
+**		[p.x + 0][p.y - (dist - 0)]
+**		[p.x + 1][p.y - (dist - 1)]
+**		[p.x + 2][p.y - (dist - 2)]
+**		[p.x + 3][p.y - (dist - 3)]
+**	[p.x + dist][p.y]
+**		[p.x + (dist - n)][p.y + n]
+**		[p.x + (dist - 0)][p.y + 0]
+**		[p.x + (dist - 1)][p.y + 1]
+**		[p.x + (dist - 2)][p.y + 2]
+**		[p.x + (dist - 3)][p.y + 3]
+**	[p.x][p.y + dist]
+**		[p.x - n][p.y + (dist - n)]
+**		[p.x - 0][p.y + (dist - 0)]
+**		[p.x - 1][p.y + (dist - 1)]
+**		[p.x - 2][p.y + (dist - 2)]
+**		[p.x - 3][p.y + (dist - 3)]
 */
-

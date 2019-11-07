@@ -6,7 +6,7 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/29 16:31:50 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 13:27:54 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:44:04 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,27 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "lemipc.h"
+
+t_pos		get_message(t_data *shared, t_player *p, t_msg msg)
+{
+	t_pos	enemy;
+
+	if (msgrcv(p->id_msg, &msg, sizeof(msg.pos), p->team, IPC_NOWAIT) == -1)
+	{
+		ft_putstrc("No message for team\n", C_CYAN);
+		enemy = find_closest(shared, p->team, p->pos);
+	}
+	else
+	{
+		ft_putstrc("Message for team. Enemy on [", C_CYAN);
+		ft_putnbr(msg.pos.x);
+		ft_putstrc(";", C_CYAN);
+		ft_putnbr(msg.pos.y);
+		ft_putstrc("]\n", C_CYAN);
+		enemy = find_closest(shared, p->team, msg.pos);
+	}
+	return (enemy);
+}
 
 void		loop(t_data *shared, t_player *p, int sem_id)
 {
@@ -35,19 +56,7 @@ void		loop(t_data *shared, t_player *p, int sem_id)
 			sem_unlock(sem_id);
 			return ;
 		}
-		if (msgrcv(p->id_msg, &msg, sizeof(msg.pos), p->team, IPC_NOWAIT) == -1) {
-			ft_putstrc("No message for team\n", C_CYAN);
-			enemy = find_closest(shared, p->team, p->pos);
-		} else {
-			ft_putstrc("Message for team. Enemy on [", C_CYAN);
-			ft_putnbr(msg.pos.x);
-			ft_putstrc(";", C_CYAN);
-			ft_putnbr(msg.pos.y);
-			ft_putstrc("]\n", C_CYAN);
-			enemy = find_closest(shared, p->team, msg.pos);
-		}
-		// enemy = find_enemy(shared, p->team, p->pos);
-
+		enemy = get_message(shared, p, msg);
 		if (enemy.x != -1)
 		{
 			move_to(enemy, p, shared);
@@ -58,16 +67,6 @@ void		loop(t_data *shared, t_player *p, int sem_id)
 		sem_unlock(sem_id);
 		sleep(1);
 	}
-}
-
-int		return_clear(int code, t_data *shared)
-{
-	t_player	*p;
-
-	p = get_player();
-	shm_clear(p, shared);
-	free(p);
-	return (code);
 }
 
 int			main(int ac, char **av)

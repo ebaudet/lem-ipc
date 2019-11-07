@@ -6,24 +6,11 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/31 07:29:44 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 13:39:43 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:39:52 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemipc.h"
-
-static t_pos	get_initial_pos(t_data *shared, int i)
-{
-	t_pos	pos;
-
-	(void)i;
-	(void)shared;
-	pos.x = rand_val() % HEIGHT;
-	pos.y = rand_val() % WIDTH;
-	// pos.y = shared->nb_player % 2 ? 1 : WIDTH - 1;
-	// pos.x = shared->nb_player + i;
-	return (pos);
-}
 
 void		player_init(t_data *shared, char team, t_player *player)
 {
@@ -33,9 +20,8 @@ void		player_init(t_data *shared, char team, t_player *player)
 	i = 0;
 	while (42)
 	{
-		pos = get_initial_pos(shared, i);
-		// pos.x = rand_val() % HEIGHT;
-		// pos.y = rand_val() % WIDTH;
+		pos.x = rand_val() % HEIGHT;
+		pos.y = rand_val() % WIDTH;
 		if (shared->tab[pos.x][pos.y] == 0)
 		{
 			shared->tab[pos.x][pos.y] = team;

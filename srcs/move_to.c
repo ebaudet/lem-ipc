@@ -6,13 +6,12 @@
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/01 22:32:10 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/04 16:07:32 by ebaudet          ###   ########.fr       */
+/*   Updated: 2019/11/07 14:43:46 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "lemipc.h"
-
 
 void	move_pos(t_data *shared, t_player *p, t_pos new_pos)
 {
@@ -26,7 +25,7 @@ char	get_tab_pos(t_data *shared, t_pos pos)
 	return (shared->tab[pos.x][pos.y]);
 }
 
-void		move_height(t_pos enemy, t_player *p, t_data *shared, int t)
+void	move_height(t_pos enemy, t_player *p, t_data *shared, int t)
 {
 	int		move;
 	t_pos	new_pos;
@@ -53,7 +52,7 @@ void		move_height(t_pos enemy, t_player *p, t_data *shared, int t)
 	}
 }
 
-void		move_width(t_pos enemy, t_player *p, t_data *shared, int t)
+void	move_width(t_pos enemy, t_player *p, t_data *shared, int t)
 {
 	int		move;
 	t_pos	new_pos;
@@ -80,7 +79,7 @@ void		move_width(t_pos enemy, t_player *p, t_data *shared, int t)
 	}
 }
 
-void		move_to(t_pos enemy, t_player *p, t_data *shared)
+void	move_to(t_pos enemy, t_player *p, t_data *shared)
 {
 	int		height;
 	int		width;
