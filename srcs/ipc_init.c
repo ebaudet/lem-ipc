@@ -5,31 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/06/01 19:17:14 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/10/25 17:45:35 by ebaudet          ###   ########.fr       */
+/*   Created: 2019/11/07 12:13:06 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/11/07 12:40:59 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/ipc.h>
-#include <sys/shm.h>
 #include "lemipc.h"
-#include "libft.h"
+#include <sys/ipc.h>
+#include <stdlib.h>
 
-int		ipc_init(key_t key, t_data **sh_data)
+int		ipc_init(t_player **p, t_data **shared)
 {
-	int		id;
+	int		key;
 
-	if ((id = shmget(key, sizeof(t_data), IPC_CREAT | IPC_EXCL | 0666)) == -1)
-	{
-		ft_putstrc("shared_msg already exist\n", C_YELLOW);
-		if ((id = shmget(key, sizeof(t_data), 0)) == -1)
-			return (ft_error("Error shmget"));
-		*sh_data = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
-	}
-	else
-	{
-		*sh_data = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
-		data_init(*sh_data);
-	}
-	return (id);
+	if ((key = ftok(".", 'A')) == -1)
+		return (ft_error("ftok"));
+	*p = get_player();
+	if (((*p)->id_sh = sh_init(key, shared)) == EXIT_FAILURE)
+		return (return_clear(EXIT_FAILURE, *shared));
+	if (((*p)->id_sem = semaphore_init(key)) == EXIT_FAILURE)
+		return (return_clear(EXIT_FAILURE, *shared));
+	if (((*p)->id_msg = msg_init(key)) == EXIT_FAILURE)
+		return (return_clear(EXIT_FAILURE, *shared));
+	return (EXIT_SUCCESS);
 }

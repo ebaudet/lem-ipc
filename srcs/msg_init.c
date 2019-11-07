@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shm_clear.c                                        :+:      :+:    :+:   */
+/*   msg_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/06/01 22:17:05 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 12:25:44 by ebaudet          ###   ########.fr       */
+/*   Created: 2019/11/07 11:43:43 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/11/07 12:43:25 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/shm.h>
-#include <sys/sem.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
 #include <sys/msg.h>
-#include <stdlib.h>
+#include <sys/shm.h>
+#include "libft.h"
 #include "lemipc.h"
 
-int		shm_clear(t_player *p, t_data *shared)
+int		msg_init(key_t key)
 {
-	int		result;
+	int id;
 
-	result = EXIT_SUCCESS;
-	if (shared->nb_player < 1)
+	if ((id = msgget(key, SHM_R | SHM_W)) == -1)
 	{
-		if (shmctl(p->id_sh, IPC_RMID, NULL) == EXIT_FAILURE)
-			result = EXIT_FAILURE;
-		if (semctl(p->id_sem, 0, IPC_RMID, 0) == EXIT_FAILURE)
-			result = EXIT_FAILURE;
-		if (msgctl(p->id_msg, IPC_RMID, NULL) == EXIT_FAILURE)
-			result = EXIT_FAILURE;
+		ft_putstrc("Message Queue already esist\n", C_YELLOW);
+		if ((id = msgget(key, IPC_CREAT | SHM_R | SHM_W)) == -1)
+			return (ft_error("Error Message Queue"));
 	}
-	return (result);
+	return (id);
 }

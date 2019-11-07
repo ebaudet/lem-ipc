@@ -1,41 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   eb_signal.c                                        :+:      :+:    :+:   */
+/*   sh_init.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ebaudet <ebaudet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/06/01 23:09:43 by ebaudet           #+#    #+#             */
-/*   Updated: 2019/11/07 12:26:33 by ebaudet          ###   ########.fr       */
+/*   Created: 2014/06/01 19:17:14 by ebaudet           #+#    #+#             */
+/*   Updated: 2019/11/07 12:11:46 by ebaudet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <signal.h>
 #include <sys/ipc.h>
-#include <sys/types.h>
+#include <sys/shm.h>
 #include "lemipc.h"
 #include "libft.h"
 
-void	eb_sig_action(int s)
+int		sh_init(key_t key, t_data **shared)
 {
-	t_player	*p;
-	t_data		*shared;
+	int		id;
 
-	(void)s;
-	if (ipc_init(&p ,&shared) == EXIT_FAILURE)
-		exit(0);
-	shared->tab[p->pos.x][p->pos.y] = 0;
-	shared->nb_player--;
-	shm_clear(p, shared);
-	free(p);
-	exit(0);
-}
-
-void	get_sig(void)
-{
-	signal(SIGINT, &eb_sig_action);
-	signal(SIGQUIT, &eb_sig_action);
-	signal(SIGTERM, &eb_sig_action);
-	signal(SIGCHLD, &eb_sig_action);
+	if ((id = shmget(key, sizeof(t_data), IPC_CREAT | IPC_EXCL | 0666)) == -1)
+	{
+		ft_putstrc("shared_msg already exist\n", C_YELLOW);
+		if ((id = shmget(key, sizeof(t_data), 0)) == -1)
+			return (ft_error("Error shmget"));
+		*shared = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
+	}
+	else
+	{
+		*shared = (t_data *)shmat(id, NULL, SHM_R | SHM_W);
+		data_init(*shared);
+	}
+	return (id);
 }
