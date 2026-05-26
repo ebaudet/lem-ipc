@@ -15,9 +15,7 @@
 void		player_init(t_data *shared, char team, t_player *p)
 {
 	t_pos	pos;
-	int		i;
 
-	i = 0;
 	while (42)
 	{
 		pos.x = rand_val() % HEIGHT;
@@ -27,7 +25,6 @@ void		player_init(t_data *shared, char team, t_player *p)
 			shared->tab[pos.x][pos.y] = team;
 			break ;
 		}
-		i++;
 	}
 	p->pos = pos;
 	p->team = team;
