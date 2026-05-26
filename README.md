@@ -3,7 +3,7 @@
 `lem-ipc` is a small C project demonstrating System V IPC through a simple
 multi-process arena simulation.
 
-IPC stands for Inter-process communication.
+> IPC stands for Inter-process communication.
 
 Each process started with `./lemipc <team>` represents one player. Players from
 the same team share information through a message queue, all players are stored
